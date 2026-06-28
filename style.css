@@ -74,9 +74,9 @@ ul { list-style: none; }
 .btn-cv:hover { background: var(--accent); transform: translateY(-1px); }
 
 /* ==============================
-   HERO — SPLIT LAYOUT
-   Left: photo + name block (top-left anchored)
-   Right: role + desc + actions + meta
+    HERO — SPLIT LAYOUT
+    Left: photo + name block (top-left anchored)
+    Right: role + desc + actions + meta
 ============================== */
 #hero {
   min-height: 100vh;
@@ -93,12 +93,25 @@ ul { list-style: none; }
     linear-gradient(rgba(255,255,255,.032) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.032) 1px, transparent 1px);
   background-size: 52px 52px;
+  animation: gridMove 25s linear infinite;
 }
+
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 52px 52px; }
+}
+
 .hero-bg-glow {
   position: absolute; z-index: 0; pointer-events: none;
   width: 540px; height: 540px; border-radius: 50%;
   background: radial-gradient(circle, rgba(24,71,214,.38) 0%, transparent 70%);
   top: 0; right: 80px;
+  animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-20px, 20px); }
 }
 
 /* two-column inner */
@@ -170,38 +183,42 @@ ul { list-style: none; }
   color: #93c5fd; font-size: .72rem; font-weight: 700;
   letter-spacing: .12em; text-transform: uppercase;
   padding: .35rem 1rem; border-radius: 999px; margin-bottom: 1.4rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1) 50ms, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 50ms;
 }
+
 .hero-right h2 {
   font-family: 'Syne', sans-serif; font-weight: 800;
-  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-  color: var(--white); line-height: 1.2; letter-spacing: -.02em;
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  color: var(--white); line-height: 1.15; letter-spacing: -.02em;
   margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1) 150ms, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 150ms;
 }
+
 .hero-desc {
   color: #8899c8; font-size: .92rem; max-width: 430px;
-  line-height: 1.85; margin-bottom: 2rem;
+  line-height: 1.75; margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1) 250ms, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 250ms;
 }
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.4rem; }
 
-.btn-primary {
-  background: var(--accent); color: var(--white);
-  padding: .75rem 1.75rem; border-radius: var(--r-sm);
-  font-weight: 700; font-size: .85rem; letter-spacing: .03em;
-  display: inline-flex; align-items: center; gap: .5rem;
-  transition: background .2s, transform .15s, box-shadow .2s;
-  box-shadow: 0 4px 20px rgba(24,71,214,.45);
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.4rem;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1) 350ms, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 350ms;
 }
-.btn-primary:hover { background: var(--accent-2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(24,71,214,.55); }
 
-.btn-ghost {
-  border: 1.5px solid rgba(255,255,255,.2); color: rgba(255,255,255,.8);
-  padding: .75rem 1.75rem; border-radius: var(--r-sm);
-  font-weight: 600; font-size: .85rem;
-  transition: border-color .2s, background .2s;
+.hero-meta {
+  display: flex; flex-direction: column; gap: .5rem;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1) 450ms, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 450ms;
 }
-.btn-ghost:hover { border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.07); }
-
-.hero-meta { display: flex; flex-direction: column; gap: .5rem; }
 .hero-meta span {
   color: var(--mid); font-size: .82rem;
   display: flex; align-items: center; gap: .55rem;
@@ -246,9 +263,9 @@ ul { list-style: none; }
   background: var(--white); border: 1px solid var(--ghost);
   border-radius: var(--r); padding: 1.6rem 1.4rem;
   box-shadow: var(--shadow-sm);
-  transition: transform .2s, box-shadow .2s, border-color .2s;
+  transition: transform .35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow .35s, border-color .35s;
 }
-.skill-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: #c5d3f5; }
+.skill-card:hover { transform: translateY(-8px); box-shadow: 0 12px 32px rgba(24,71,214,.18); border-color: var(--accent); }
 .skill-card-icon {
   width: 42px; height: 42px; border-radius: 11px;
   background: linear-gradient(135deg, #dce8ff, #eef2ff);
@@ -329,11 +346,11 @@ ul { list-style: none; }
   border: 1px solid var(--ghost);
   box-shadow: var(--shadow-sm);
   background: var(--white);
-  transition: transform .2s, box-shadow .2s;
+  transition: transform .35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow .35s;
   display: flex; flex-direction: column; gap: .4rem;
   position: relative; overflow: hidden;
 }
-.formation-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.formation-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(24,71,214,.18); }
 
 .formation-card.featured {
   background: var(--ink);
@@ -433,10 +450,19 @@ ul { list-style: none; }
   padding: .88rem 2.5rem; border-radius: var(--r-sm);
   font-weight: 700; font-size: .88rem; letter-spacing: .04em;
   display: inline-flex; align-items: center; gap: .6rem;
-  transition: background .2s, transform .15s;
+  transition: background .25s, transform .2s, box-shadow .25s;
   box-shadow: 0 4px 20px rgba(8,14,31,.22);
+  position: relative; overflow: hidden;
 }
-.btn-dl:hover { background: var(--accent); transform: translateY(-2px); }
+.btn-dl::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent);
+  transition: left .6s;
+}
+.btn-dl:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(24,71,214,.35); }
+.btn-dl:hover::before { left: 100%; }
 
 /* ==============================
    FOOTER
