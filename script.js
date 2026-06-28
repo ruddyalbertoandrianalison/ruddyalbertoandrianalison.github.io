@@ -51,15 +51,31 @@ window.addEventListener('scroll', () => {
 });
 
 // ==============================
-//  HERO — parallax effect
+//  HERO — mouse parallax effect
 // ==============================
+const hero = document.querySelector('#hero');
 const heroGlow = document.querySelector('.hero-bg-glow');
-window.addEventListener('scroll', () => {
-  if (heroGlow) {
-    const scrolled = window.scrollY;
-    heroGlow.style.transform = `translateY(${scrolled * 0.3}px) scale(${1 + scrolled * 0.0005})`;
-  }
-}, { passive: true });
+const heroNameBlock = document.querySelector('.hero-name-block');
+
+if (hero) {
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    
+    if (heroGlow) {
+      heroGlow.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+    }
+    if (heroNameBlock) {
+      heroNameBlock.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
+    }
+  });
+  
+  hero.addEventListener('mouseleave', () => {
+    if (heroGlow) heroGlow.style.transform = '';
+    if (heroNameBlock) heroNameBlock.style.transform = '';
+  });
+}
 
 // ==============================
 //  ACTIVE NAV LINK highlight
