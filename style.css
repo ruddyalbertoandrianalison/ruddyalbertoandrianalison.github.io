@@ -466,3 +466,82 @@ footer {
   .hero-photo-frame { width: 200px; height: 240px; }
   .hero-photo-deco { width: 200px; height: 240px; }
 }
+
+/* ==============================
+   PROJET PFE
+============================== */
+.projet-intro {
+  color: var(--slate); font-size: .95rem; max-width: 700px;
+  line-height: 1.8; margin-bottom: 2.8rem;
+}
+
+.projet-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem; margin-bottom: 3rem;
+}
+
+.projet-card {
+  background: var(--white); border: 1.5px solid var(--ghost);
+  border-radius: var(--r); padding: 1.8rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .25s, border-color .25s, transform .2s;
+}
+.projet-card:hover {
+  box-shadow: var(--shadow);
+  border-color: rgba(24,71,214,.25);
+  transform: translateY(-3px);
+}
+.projet-card-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--glow));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.1rem; margin-bottom: 1rem;
+}
+.projet-card h3 {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 1rem; color: var(--ink-2); margin-bottom: .9rem;
+}
+.projet-list { display: flex; flex-direction: column; gap: .55rem; }
+.projet-list li {
+  display: flex; align-items: flex-start; gap: .6rem;
+  font-size: .83rem; color: var(--slate); line-height: 1.5;
+}
+.tag {
+  display: inline-block; background: rgba(24,71,214,.08);
+  color: var(--accent); font-size: .65rem; font-weight: 700;
+  letter-spacing: .07em; padding: .18rem .55rem;
+  border-radius: 4px; flex-shrink: 0; margin-top: .05rem;
+  border: 1px solid rgba(24,71,214,.15);
+}
+
+/* Architecture strip */
+.projet-arch {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: .6rem;
+  background: var(--ink); border-radius: var(--r);
+  padding: 1.8rem 2rem;
+}
+.arch-node {
+  display: flex; flex-direction: column; align-items: center;
+  gap: .45rem; min-width: 80px;
+}
+.arch-node i {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; background: rgba(82,133,255,.15);
+  border: 1.5px solid rgba(82,133,255,.3); color: var(--glow);
+}
+.arch-node span {
+  font-size: .67rem; font-weight: 600; letter-spacing: .05em;
+  color: #8899c8; text-align: center; text-transform: uppercase;
+}
+.arch-fw i { background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.3); color: #f87171; }
+.arch-dmz i { background: rgba(245,158,11,.15); border-color: rgba(245,158,11,.3); color: #fbbf24; }
+.arch-cloud i { background: rgba(74,222,128,.15); border-color: rgba(74,222,128,.3); color: #4ade80; }
+.arch-arrow { color: #3a4d7a; font-size: .9rem; }
+
+@media (max-width: 900px) {
+  .projet-grid { grid-template-columns: 1fr; }
+  .projet-arch { gap: .4rem; padding: 1.4rem 1rem; }
+  .arch-arrow { display: none; }
+}

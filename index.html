@@ -18,6 +18,7 @@
       <li><a href="#about">À propos</a></li>
       <li><a href="#skills">Compétences</a></li>
       <li><a href="#experience">Expériences</a></li>
+      <li><a href="#projet">Projet PFE</a></li>
       <li><a href="#formation">Formation</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -57,7 +58,7 @@
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary"><i class="fa fa-envelope"></i> Me contacter</a>
-        <a href="#experience" class="btn-ghost">Voir mes expériences</a>
+        <a href="CV-Ruddy-Andrianalison.pdf" download class="btn-ghost"><i class="fa fa-download"></i> Télécharger CV</a>
       </div>
       <div class="hero-meta">
         <span><i class="fa fa-map-marker-alt"></i> Mahajanga, Madagascar</span>
@@ -236,6 +237,87 @@
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ===== PROJET PFE ===== -->
+<section id="projet" class="section">
+  <div class="container">
+    <div class="section-eyebrow">Projet de Fin d'Études</div>
+    <h2 class="section-title">Infrastructure Cloud Privé — <span>Région Boeny</span></h2>
+    <p class="projet-intro">
+      Stagiaire au Service Digitalisation de la Région Boeny (Octobre 2025 — 6 semaines), j'ai conçu
+      et déployé une infrastructure cloud privé complète pour la centralisation et la sécurisation
+      des données institutionnelles.
+    </p>
+
+    <div class="projet-grid">
+
+      <!-- SERVEURS -->
+      <div class="projet-card">
+        <div class="projet-card-icon"><i class="fa fa-server"></i></div>
+        <h3>Serveurs Déployés</h3>
+        <ul class="projet-list">
+          <li><span class="tag">NAS/SAN</span> Serveur de fichiers centralisé</li>
+          <li><span class="tag">BDD</span> Serveur de base de données</li>
+          <li><span class="tag">AD</span> Contrôleur de domaine — Active Directory</li>
+          <li><span class="tag">DNS</span> Résolution de noms interne</li>
+          <li><span class="tag">PROXY</span> Filtrage et contrôle d'accès web</li>
+        </ul>
+      </div>
+
+      <!-- SÉCURITÉ -->
+      <div class="projet-card">
+        <div class="projet-card-icon"><i class="fa fa-shield-alt"></i></div>
+        <h3>Sécurité &amp; Réseau</h3>
+        <ul class="projet-list">
+          <li><span class="tag">IPS</span> Système de prévention d'intrusion</li>
+          <li><span class="tag">FIREWALL</span> Contrôle des accès horaires au serveur</li>
+          <li><span class="tag">DMZ</span> Zone démilitarisée pour services exposés</li>
+          <li><span class="tag">HTTPS</span> Chiffrement des communications</li>
+          <li><span class="tag">ACL</span> Gestion fine des permissions utilisateurs</li>
+        </ul>
+      </div>
+
+      <!-- HAUTE DISPONIBILITÉ -->
+      <div class="projet-card">
+        <div class="projet-card-icon"><i class="fa fa-sync-alt"></i></div>
+        <h3>Haute Disponibilité</h3>
+        <ul class="projet-list">
+          <li><span class="tag">FAILOVER</span> Protocole de basculement de trafic automatique</li>
+          <li><span class="tag">BACKUP</span> Protocole de sauvegarde et clonage de données</li>
+          <li><span class="tag">RAID</span> Redondance matérielle des disques</li>
+          <li><span class="tag">SNAPSHOT</span> Points de restauration planifiés</li>
+        </ul>
+      </div>
+
+      <!-- MONITORING -->
+      <div class="projet-card">
+        <div class="projet-card-icon"><i class="fa fa-chart-line"></i></div>
+        <h3>Monitoring &amp; Alertes</h3>
+        <ul class="projet-list">
+          <li><span class="tag">MONITOR</span> Supervision temps réel du système</li>
+          <li><span class="tag">ALERTES</span> Notifications automatiques en cas de défaillance</li>
+          <li><span class="tag">LOGS</span> Journalisation centralisée des événements</li>
+          <li><span class="tag">USERS</span> Gestion centralisée des utilisateurs (AD)</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Architecture diagram strip -->
+    <div class="projet-arch">
+      <div class="arch-node arch-internet"><i class="fa fa-globe"></i><span>Internet</span></div>
+      <div class="arch-arrow"><i class="fa fa-arrow-right"></i></div>
+      <div class="arch-node arch-fw"><i class="fa fa-fire"></i><span>Firewall / IPS</span></div>
+      <div class="arch-arrow"><i class="fa fa-arrow-right"></i></div>
+      <div class="arch-node arch-dmz"><i class="fa fa-network-wired"></i><span>DMZ</span></div>
+      <div class="arch-arrow"><i class="fa fa-arrow-right"></i></div>
+      <div class="arch-node arch-lan"><i class="fa fa-building"></i><span>LAN Interne</span></div>
+      <div class="arch-arrow"><i class="fa fa-arrow-right"></i></div>
+      <div class="arch-node arch-cloud"><i class="fa fa-cloud"></i><span>Cloud Privé</span></div>
+    </div>
+
   </div>
 </section>
 
