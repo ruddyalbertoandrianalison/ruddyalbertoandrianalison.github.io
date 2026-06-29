@@ -1,22 +1,30 @@
-// Navbar shadow on scroll
-const navbar = document.getElementById('navbar');
+// ==============================
+//  NAVBAR — shadow on scroll
+// ==============================
+const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
+  nav.classList.toggle('scrolled', window.scrollY > 20);
 });
 
-// Animate timeline items on scroll
-const timelineItems = document.querySelectorAll('.timeline-item');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 150);
-    }
-  });
-}, { threshold: 0.15 });
+// ==============================
+//  TIMELINE — reveal on scroll
+// ==============================
+const tlItems = document.querySelectorAll('.tl-item');
+if (tlItems.length) {
+  const tlObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 130);
+        tlObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  tlItems.forEach(el => tlObs.observe(el));
+}
 
-timelineItems.forEach(item => observer.observe(item));
-
-// Smooth active nav link highlight
+// ==============================
+//  ACTIVE NAV LINK highlight
+// ==============================
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -25,7 +33,31 @@ window.addEventListener('scroll', () => {
   sections.forEach(sec => {
     if (window.scrollY >= sec.offsetTop - 90) current = sec.id;
   });
-  navLinks.forEach(link => {
-    link.style.color = link.getAttribute('href') === `#${current}` ? '#2563eb' : '';
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
   });
-});
+}, { passive: true });
+
+// ==============================
+//  SKILL CARDS — staggered reveal
+// ==============================
+const skillCards = document.querySelectorAll('.skill-card');
+if (skillCards.length) {
+  const skillObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i * 60) + 'ms';
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        skillObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  skillCards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(18px)';
+    card.style.transition = 'opacity .45s, transform .45s';
+    skillObs.observe(card);
+  });
+}
