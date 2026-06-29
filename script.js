@@ -1,94 +1,62 @@
-// ==============================
-//  PREMIUM ANIMATIONS
-// ==============================
-const animateOnScroll = (selector, options = {}) => {
-  const elements = document.querySelectorAll(selector);
-  if (!elements.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        const delay = options.stagger ? i * (options.staggerDelay || 80) : 0;
-        setTimeout(() => {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }, delay);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  elements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(25px)';
-    el.style.transition = 'opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
-    observer.observe(el);
-  });
-};
-
-// Cards reveal
-animateOnScroll('.skill-card', { stagger: true, staggerDelay: 80 });
-animateOnScroll('.tl-item', { stagger: true, staggerDelay: 120 });
-animateOnScroll('.formation-card', { stagger: true, staggerDelay: 100 });
-
-// Hero text reveal (immediate on load)
-window.addEventListener('DOMContentLoaded', () => {
-  const heroElements = document.querySelectorAll('.hero-right > *');
-  heroElements.forEach((el, i) => {
-    setTimeout(() => {
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    }, i * 120);
-  });
-});
-
-// ==============================
-//  NAVBAR — shadow on scroll
-// ==============================
+// ==============================================
+//  GESTION DE LA NAVIGATION (Changement au Scroll)
+// ==============================================
 const nav = document.getElementById('navbar');
+
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
+  if (window.scrollY > 40) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
 });
 
-// ==============================
-//  HERO — mouse parallax effect
-// ==============================
-const hero = document.querySelector('#hero');
-const heroGlow = document.querySelector('.hero-bg-glow');
-const heroNameBlock = document.querySelector('.hero-name-block');
+// ==============================================
+//  EFFET PARALLAX INTERACTIF (Section Hero)
+// ==============================================
+const heroSection = document.getElementById('hero');
+const glowBg = document.querySelector('.hero-bg-glow');
 
-if (hero) {
-  hero.addEventListener('mousemove', (e) => {
-    const rect = hero.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
+if (heroSection && glowBg) {
+  heroSection.addEventListener('mousemove', (e) => {
+    const bounds = heroSection.getBoundingClientRect();
+    // Calcul de la position relative de la souris (-0.5 à 0.5)
+    const relativeX = (e.clientX - bounds.left) / bounds.width - 0.5;
+    const relativeY = (e.clientY - bounds.top) / bounds.height - 0.5;
     
-    if (heroGlow) {
-      heroGlow.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
-    }
-    if (heroNameBlock) {
-      heroNameBlock.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
-    }
+    // Déplacement fluide de l'effet lumineux en arrière-plan
+    glowBg.style.transform = `translate(${relativeX * 60}px, ${relativeY * 60}px)`;
   });
   
-  hero.addEventListener('mouseleave', () => {
-    if (heroGlow) heroGlow.style.transform = '';
-    if (heroNameBlock) heroNameBlock.style.transform = '';
+  // Réinitialisation de la position lorsque la souris quitte la zone
+  heroSection.addEventListener('mouseleave', () => {
+    glowBg.style.transform = 'translate(0px, 0px)';
   });
 }
 
-// ==============================
-//  ACTIVE NAV LINK highlight
-// ==============================
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
+// ==============================================
+//  MISE EN VALEUR DES LIENS ACTIFS DANS LE MENU
+// ==============================================
+const trackedSections = document.querySelectorAll('section[id]');
+const menuLinks = document.querySelectorAll('.nav-links a');
 
 window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(sec => {
-    if (window.scrollY >= sec.offsetTop - 90) current = sec.id;
+  let currentSectionId = '';
+  
+  trackedSections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    
+    // On considère la section active lorsqu'on se trouve à son tiers supérieur
+    if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+      currentSectionId = section.getAttribute('id');
+    }
   });
-  navLinks.forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+
+  menuLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${currentSectionId}`) {
+      link.classList.add('active');
+    }
   });
-}, { passive: true });
+});
